@@ -6,6 +6,7 @@ const htmlPlugin = new HtmlWebPackPlugin({
 });
 
 module.exports = {
+    devtool: "cheap-module-eval-source-map",
     module: {
         rules: [
             {
@@ -23,15 +24,24 @@ module.exports = {
                     },
                     {
                         loader: "css-loader",
-                        options: {
-                            modules: true,
-                            importLoaders: 1,
-                            localIdentName: "[name]_[local]_[hash:base64]",
-                            sourceMap: true,
-                            minimize: true
-                        }
+                        // options: {
+                        //     modules: true,
+                        //     importLoaders: 1,
+                        //     localIdentName: "[name]_[local]_[hash:base64]",
+                        //     sourceMap: true,
+                        //     minimize: true
+                        // }
                     }
                 ]
+            },
+            {
+                test: /\.(ttf|eot|woff|woff2)$/,
+                use: {
+                    loader: "file-loader",
+                    options: {
+                        name: "fonts/[name].[ext]",
+                    },
+                }
             }
         ]
     },
