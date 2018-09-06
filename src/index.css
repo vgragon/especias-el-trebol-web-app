@@ -1,0 +1,39 @@
+:root {
+    /* Spacing */
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 20px;
+    --spacing-lg: 30px;
+    --spacing-xl: 50px;
+
+    /* Color */
+    --app-brand-main: #87E271;
+    --app-brand-secondary: #71B2E2;
+    --app-brand-gray-light: #EFEFEF;
+    --app-brand-gray: #C8C8C8;
+    --app-brand-font: #000000;
+}
+
+@font-face {
+    font-family: Lato;
+    font-weight: normal;
+    src: url("./assets/fonts/Lato/Lato-Regular.ttf");
+}
+
+@font-face {
+    font-family: LatoLight;
+    font-weight: normal;
+    src: url("./assets/fonts/Lato/Lato-Bold.ttf");
+}
+
+@font-face {
+    font-family: LatoBold;
+    font-weight: normal;
+    src: url("./assets/fonts/Lato/Lato-Light.ttf");
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Lato, 'sans-serif';
+}
