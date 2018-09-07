@@ -7,7 +7,14 @@ import App from './app/App';
 
 import store from './store';
 
+import {library} from '@fortawesome/fontawesome-svg-core';
+import {
+    faBars,
+} from '@fortawesome/free-solid-svg-icons';
+
 import './index.css';
+
+library.add(faBars);
 
 window.store = store;
 

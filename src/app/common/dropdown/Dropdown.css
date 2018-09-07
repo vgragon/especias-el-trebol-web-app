@@ -1,0 +1,32 @@
+.b-dropdown-container {
+    position: relative;
+    max-height: 35px;
+    background-color: var(--app-brand-gray-light);
+}
+
+.b-dropdown {
+    color: var(--app-brand-font);
+    position: relative;
+    display: inline-block;
+    width: 450px;
+    max-width: 100%;
+    user-select: none;
+    cursor: pointer;
+}
+
+.b-dropdown__toggle--primary, .b-dropdown__toggle--secondary {
+    display: inline-block;
+    padding: var(--spacing-sm);
+    vertical-align: middle;
+}
+
+.b-dropdown__toggle--primary {
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.b-dropdown__toggle--secondary {
+    float: right;
+}

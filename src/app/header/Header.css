@@ -1,4 +1,25 @@
 .app-header {
-    height: 50px;
-    box-shadow: 5px 1px 5px 1px var(--app-brand-gray);
+    height: calc(60px - var(--spacing-md));
+    padding: var(--spacing-md);
+    box-shadow: 1px 1px 0 0 var(--app-brand-gray);
+}
+
+.app-header__title {
+    display: inline-block;
+    margin-left: var(--spacing-md);
+    vertical-align: middle;
+}
+
+.app-header__navigation-container {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+}
+
+.app-header__navigation-container .app-dropdown__options {
+    width: 200px;
+}
+
+.app-header__navigation-container .b-dropdown__options-list {
+    top: 50px;
 }

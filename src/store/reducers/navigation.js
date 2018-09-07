@@ -1,15 +1,15 @@
 import routes from './../../routes';
 
-const SET_NAVIGATION_ITEMS = "SET_NAVIGATION_ITEMS";
+import * as actions from './../actions/navigation';
 
-function setNavigationItems(items) {
-    return items.map(item => Object.assign({}, item));
+function setActiveNavigation(navigationItems, selectedItem) {
+    return navigationItems.map(item => Object.assign({}, item, {active: item.path === selectedItem.path}));
 }
 
 function navigationItems(state = routes, action) {
     switch (action.type) {
-        case SET_NAVIGATION_ITEMS:
-            return setNavigationItems(action.payload.items);
+        case actions.SET_ACTIVE_NAVIGATION:
+            return setActiveNavigation(state, action.payload);
         default:
             return state
     }
