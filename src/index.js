@@ -10,11 +10,14 @@ import store from './store';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {
     faBars,
+    faChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
+
+import 'whatwg-fetch';
 
 import './index.css';
 
-library.add(faBars);
+library.add(faBars, faChevronDown);
 
 window.store = store;
 

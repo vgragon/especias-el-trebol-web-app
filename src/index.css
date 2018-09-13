@@ -1,3 +1,7 @@
+@import "./app/common/styles/forms.css";
+@import "./app/common/styles/buttons.css";
+@import "./app/common/styles/tables.css";
+
 :root {
     /* Spacing */
     --spacing-xs: 5px;
@@ -59,4 +63,24 @@ h2 {
 
 h3 {
     font-size: 1.6rem;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.margin-bottom-sm {
+    margin-bottom: var(--spacing-sm);
+}
+
+.margin-bottom-md {
+    margin-bottom: var(--spacing-md);
 }

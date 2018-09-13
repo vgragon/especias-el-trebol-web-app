@@ -1,0 +1,7 @@
+.app-sales__capture {
+    width: 95%;
+}
+
+.app-form__submit {
+    margin-top: var(--spacing-lg);
+}

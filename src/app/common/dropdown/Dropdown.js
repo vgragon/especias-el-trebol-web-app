@@ -4,14 +4,23 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import $ from 'jquery';
 
 import './Dropdown.css';
+import DropdownOptions from "../dropdown-options/DropdownOptions";
 
-const placeholderOption = {id: "0", text: "Select an option"};
+const placeholderOption = {id: "DEFAULT", text: "Select an option"};
 
 class Dropdown extends Component {
     constructor(props) {
         super(props);
+        let {propertyWithID, propertyWithName, propertyWithImage, selectedOption} = this.props;
         this.state = {...props};
+        this.state.selectedOption = selectedOption ? this.prepareSelectedOption(selectedOption, propertyWithID, propertyWithName, propertyWithImage) : placeholderOption;
+        this.handleClickOutsideDropdown = this.handleClickOutsideDropdown.bind(this);
         this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleSelect(callback, option) {
+        this.setState({isExpanded: false});
+        callback(option);
     }
 
     handleClick() {
@@ -26,38 +35,33 @@ class Dropdown extends Component {
         };
     }
 
+    handleClickOutsideDropdown(ev) {
+        let _this = this;
+        let touchedElement = $(ev.target);
+        let component = $(_this.refs.component);
+        if ($(touchedElement).closest(component).length === 0) {
+            _this.setState({isExpanded: false});
+        }
+    }
+
     render() {
         let {propertyWithID, propertyWithName, selectedOption} = this.state;
-        selectedOption = selectedOption || placeholderOption;
-
-        let hasValues = this.state.options ? !!this.state.options.length : false;
-        let options = hasValues ? this.state.options : [];
-
-        let optionsHTML = options.map((option, index) => {
-            let dropdownOption = {id: option[propertyWithID], text: option[propertyWithName]};
-            let className = "b-options-list__option";
-            className += selectedOption.id === dropdownOption.id ? " selected" : "";
-            return <li className={className} key={index}
-                       onClick={this.state.onSelect.bind(this, dropdownOption)}>{dropdownOption.text}</li>
-        });
-
-        let dropdownClass = "b-dropdown__options-list b-options-list";
-        dropdownClass += this.state.isExpanded ? " expanded" : "";
+        let options = this.state.options && this.state.options.length ? this.state.options : [];
+        let isExpandedClass = this.state.isExpanded ? "app-dropdown__toggler expanded" : "";
 
         return (
-            <div className="b-dropdown-container" ref='component'>
+            <div className={"b-dropdown-container " + isExpandedClass} ref='component'>
                 <div className="b-dropdown" onClick={this.handleClick}>
                     <div className="b-dropdown__toggle--primary">
-                        <FontAwesomeIcon className={"margin-right-sm"} icon={this.state.iconClassName}/>
                         {selectedOption.text}
                     </div>
                     <div className="b-dropdown__toggle--secondary">
                         <FontAwesomeIcon icon="chevron-down"/>
                     </div>
                 </div>
-                <ul className={dropdownClass}>
-                    {optionsHTML}
-                </ul>
+                <DropdownOptions onSelect={this.handleSelect.bind(this, this.state.onSelect)} options={options}
+                                 propertyWithID={propertyWithID}
+                                 propertyWithName={propertyWithName} selectedOption={selectedOption}/>
             </div>
         )
     }
@@ -74,15 +78,11 @@ class Dropdown extends Component {
     }
 
     componentDidMount() {
-        let _this = this;
-        document.body.addEventListener('click', function (ev) {
-            let touchedElement = $(ev.target);
-            let component = $(_this.refs.component);
-            if ($(touchedElement).closest(component).length === 0) {
-                _this.setState({isExpanded: false});
-            }
-        });
+        document.body.addEventListener('click', this.handleClickOutsideDropdown);
+    }
 
+    componentWillUnmount() {
+        document.body.removeEventListener('click', this.handleClickOutsideDropdown);
     }
 }
 

@@ -1,6 +1,7 @@
 .b-dropdown-container {
     position: relative;
-    max-height: 35px;
+    max-height: 40px;
+    max-width: 250px;
     background-color: var(--app-brand-gray-light);
 }
 
@@ -28,5 +29,5 @@
 }
 
 .b-dropdown__toggle--secondary {
-    float: right;
+    position: absolute;
 }

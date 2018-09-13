@@ -3,7 +3,6 @@
     max-height: 0;
     box-shadow: 0 0 1px 1px inset var(--app-brand-gray);
     z-index: 1;
-    top: 30px;
     left: 0;
     width: 100%;
     list-style: none;
@@ -15,17 +14,15 @@
     transition: max-height 0.25s ease-in-out;
 }
 
-.app-navigation__toggler.expanded .b-dropdown__options-list {
+.app-dropdown__toggler.expanded .b-dropdown__options-list {
     max-height: 150px;
 }
 
 .b-options-list__option {
     padding: var(--spacing-sm);
     text-align: left;
-}
-
-.b-options-list__option {
     cursor: pointer;
+    user-select: none;
 }
 
 .b-options-list__option:hover {

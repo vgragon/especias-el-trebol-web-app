@@ -1,0 +1,18 @@
+.app-button {
+    width: 100px;
+    height: 20px;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    color: var(--app-brand-font);
+    box-sizing: content-box;
+    font-weight: 600;
+    font-size: 1em;
+    border: none;
+}
+
+.app-button--primary {
+    background-color: var(--app-brand-main);
+}
+
+.app-button--default {
+    background-color: var(--app-brand-gray);
+}
