@@ -8,9 +8,10 @@ class DropdownOptions extends Component {
         selectedOption = selectedOption || {};
 
         let optionsHTML = options.map((option, index) => {
-            let dropdownOption = {id: option[propertyWithID], text: option[propertyWithName]};
+            let dropdownOption = {text: option[propertyWithName]};
+            dropdownOption[propertyWithID] = option[propertyWithID];
             let className = "b-options-list__option";
-            className += selectedOption.id === option.id ? " selected" : "";
+            className += selectedOption[propertyWithID] === option[propertyWithID] ? " selected" : "";
             return <li className={className} key={index}
                        onClick={onSelect.bind(this, option)}>{dropdownOption.text}</li>
         });

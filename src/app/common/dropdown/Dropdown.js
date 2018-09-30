@@ -6,33 +6,25 @@ import $ from 'jquery';
 import './Dropdown.css';
 import DropdownOptions from "../dropdown-options/DropdownOptions";
 
-const placeholderOption = {id: "DEFAULT", text: "Select an option"};
-
 class Dropdown extends Component {
     constructor(props) {
         super(props);
-        let {propertyWithID, propertyWithName, propertyWithImage, selectedOption} = this.props;
         this.state = {...props};
-        this.state.selectedOption = selectedOption ? this.prepareSelectedOption(selectedOption, propertyWithID, propertyWithName, propertyWithImage) : placeholderOption;
+        this.state.selectedOption = this.props.selectedOption || this.state.placeholderOption;
         this.handleClickOutsideDropdown = this.handleClickOutsideDropdown.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
 
     handleSelect(callback, option) {
+        if (!!this.state.selectedOption && option[this.state.propertyWithID] === this.state.selectedOption[this.state.propertyWithID]) {
+            callback(undefined);
+        } else callback(option);
+
         this.setState({isExpanded: false});
-        callback(option);
     }
 
     handleClick() {
         this.setState({isExpanded: !this.state.isExpanded});
-    }
-
-    prepareSelectedOption(originalOption, propertyWithID, propertyWithName, propertyWithImage) {
-        return {
-            id: originalOption[propertyWithID],
-            text: originalOption[propertyWithName],
-            image: originalOption[propertyWithImage]
-        };
     }
 
     handleClickOutsideDropdown(ev) {
@@ -53,7 +45,7 @@ class Dropdown extends Component {
             <div className={"b-dropdown-container " + isExpandedClass} ref='component'>
                 <div className="b-dropdown" onClick={this.handleClick}>
                     <div className="b-dropdown__toggle--primary">
-                        {selectedOption.text}
+                        {selectedOption[this.state.propertyWithName]}
                     </div>
                     <div className="b-dropdown__toggle--secondary">
                         <FontAwesomeIcon icon="chevron-down"/>
@@ -68,11 +60,15 @@ class Dropdown extends Component {
 
     componentWillReceiveProps(newProps) {
         let state = {};
-        let newSelectedOption = !this.state.selectedOption && newProps.selectedOption;
-        let hasSelectedOptionChanged = (this.state.selectedOption && newProps.selectedOption) && (this.state.selectedOption.id !== newProps.selectedOption.id);
-        if (newSelectedOption || hasSelectedOptionChanged) {
-            state.selectedOption = this.prepareSelectedOption(newProps.selectedOption, newProps.propertyWithID, newProps.propertyWithName);
+        if (newProps.selectedOption) {
+            let hasSelectedOptionChanged = this.state.selectedOption[this.state.propertyWithID] !== newProps.selectedOption[this.state.propertyWithID];
+            if (hasSelectedOptionChanged) {
+                state.selectedOption = newProps.selectedOption;
+            }
+        } else {
+            state.selectedOption = newProps.placeholderOption;
         }
+
         state.options = newProps.options;
         this.setState(state);
     }
