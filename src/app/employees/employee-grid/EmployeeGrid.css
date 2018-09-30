@@ -1,0 +1,27 @@
+.app-employee-card {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    height: 200px;
+    width: 20%;
+}
+
+.app-employee-card__image {
+    height: 120px;
+    width: 100%;
+    display: block;
+}
+
+.app-employee-card__info {
+    background-color: var(--app-brand-gray-light);
+    padding: var(--spacing-md);
+    height: calc(60px - var(--spacing-md));
+}
+
+.app-employee-card__name {
+    margin-bottom: var(--spacing-sm);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

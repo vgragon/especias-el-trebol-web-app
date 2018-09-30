@@ -1,11 +1,11 @@
 import * as actions from './../actions/employee';
 
 function addNewEmployee(allEmployees, employee) {
-    return [{...employee}, ...allEmployees];
+    return [Object.assign({}, employee, {fullName: `${employee.givenName} ${employee.familyName}`}), ...allEmployees];
 }
 
 function loadEmployees(employee) {
-    return [...employee];
+    return employee.map(employee => Object.assign({}, employee, {fullName: `${employee.givenName} ${employee.familyName}`}));
 }
 
 function employees(state = [], action) {
