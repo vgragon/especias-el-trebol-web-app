@@ -1,14 +1,14 @@
 import * as actions from './../actions/client';
 
 function addNewClient(allClients, client) {
-    return [{...client}, ...allClients];
+    return [Object.assign({}, client), ...allClients];
 }
 
 function loadClients(clients) {
-    return [...clients];
+    return clients.map(client => Object.assign({}, client));
 }
 
-function employees(state = [], action) {
+function clients(state = [], action) {
     switch (action.type) {
         case actions.ADD_NEW_CLIENT:
             return addNewClient(state, action.payload);
@@ -19,4 +19,4 @@ function employees(state = [], action) {
     }
 }
 
-export default employees;
+export default clients;

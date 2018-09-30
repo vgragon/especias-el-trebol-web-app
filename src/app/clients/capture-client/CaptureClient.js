@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
 
-import Dropdown from "../../common/dropdown/Dropdown";
-
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import * as employeeActions from "../../../store/actions/employee";
+import * as clientActions from "../../../store/actions/client";
 
-import './CaptureEmployee.css';
-import employeesUtil from "./../utilities/EmployeeService";
+import clientsUtil from "../utilities/ClientService";
 import dbUtil from "../../../server";
 
-class CaptureEmployee extends Component {
+import './CaptureClient.css';
+
+class CaptureClient extends Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -26,10 +25,10 @@ class CaptureEmployee extends Component {
         $event.preventDefault();
         let data = {...this.state};
 
-        let {isValid, errorMessage} = employeesUtil.isValid(data);
+        let {isValid, errorMessage} = clientsUtil.isValid(data);
 
         if (isValid) {
-            fetch(dbUtil.URLS.employees.create, {
+            fetch(dbUtil.URLS.clients.create, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, cors, *same-origin
                 cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -43,7 +42,7 @@ class CaptureEmployee extends Component {
             }).then(response => {
                 return response.json();
             }).then(createdObject => {
-                this.props.employeeActions.addNewEmployee(createdObject);
+                this.props.clientActions.addNewClient(createdObject);
             }); // parses response to JSON
         } else {
             console.error(errorMessage);
@@ -52,24 +51,14 @@ class CaptureEmployee extends Component {
 
     render() {
         return (
-            <div className={"app-employee__capture"}>
+            <div className={"app-client__capture"}>
                 <div className={"padding-all-md"}>
-                    <h2>Capture new employee</h2>
+                    <h2>Capture new client</h2>
                     <form onSubmit={this.handleSubmit.bind(this)} className={"app-form"}>
                         <div className={"app-input-group"}>
-                            <label className={"app-input-group__label"}>Given name</label>
-                            <input type="text" className={"app-input-group__input"} name={"givenName"}
-                                   title={"Given name"} onChange={this.handleChange.bind(this, 'givenName')}/>
-                        </div>
-                        <div className={"app-input-group"}>
-                            <label className={"app-input-group__label"}>Family name(s)</label>
-                            <input type="text" className={"app-input-group__input"} name={"familyName"}
-                                   title={"Family name"} onChange={this.handleChange.bind(this, 'familyName')}/>
-                        </div>
-                        <div className={"app-input-group"}>
-                            <label className={"app-input-group__label"}>Job position</label>
-                            <input type="text" className={"app-input-group__input"} name={"jobPosition"}
-                                   title={"Job position"} onChange={this.handleChange.bind(this, 'jobPosition')}/>
+                            <label className={"app-input-group__label"}>Name</label>
+                            <input type="text" className={"app-input-group__input"} name={"name"}
+                                   title={"Name"} onChange={this.handleChange.bind(this, 'name')}/>
                         </div>
                         <div className={"app-input-group"}>
                             <label className={"app-input-group__label"}>Telephone number</label>
@@ -96,14 +85,14 @@ class CaptureEmployee extends Component {
 }
 
 const mapStateToProps = state => ({
-    employees: state.employees
+    clients: state.clients
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    employeeActions: bindActionCreators(employeeActions, dispatch)
+    clientActions: bindActionCreators(clientActions, dispatch)
 });
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(CaptureEmployee);
+)(CaptureClient);

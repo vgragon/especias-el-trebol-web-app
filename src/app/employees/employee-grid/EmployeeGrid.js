@@ -34,9 +34,7 @@ class EmployeeGrid extends Component {
         });
 
         return (
-            <div className={"app-employee-grid"}>
-                {employeesHTML}
-            </div>
+            <div className={"app-employee-grid"}>{employeesHTML}</div>
         )
     }
 }
