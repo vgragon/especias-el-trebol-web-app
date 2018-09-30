@@ -18,8 +18,7 @@ module.exports = {
                 use: {
                     loader: "babel-loader"
                 }
-            },
-            {
+            }, {
                 test: /\.css$/,
                 use: [
                     {
@@ -36,8 +35,7 @@ module.exports = {
                         // }
                     }
                 ]
-            },
-            {
+            }, {
                 test: /\.(ttf|eot|woff|woff2)$/,
                 use: {
                     loader: "file-loader",
@@ -45,6 +43,18 @@ module.exports = {
                         name: "fonts/[name].[ext]",
                     },
                 }
+            }, {
+                test: /\.(gif|png|jpe?g|svg)$/i,
+                use: [
+                    'file-loader',
+                    {
+                        loader: 'image-webpack-loader',
+                        options: {
+                            bypassOnDebug: true, // webpack@1.x
+                            disable: true // webpack@2.x and newer
+                        },
+                    }
+                ]
             }
         ]
     },
