@@ -1,11 +1,26 @@
 import * as actions from './../actions/sales';
+import formatterUtilities from "../../app/common/utilities/formatter";
 
 function addNewSale(allSalesRecords, salesRecord) {
-    return [{...salesRecord}, ...allSalesRecords];
+    return [Object.assign({}, {...salesRecord}, {
+        hidden: false,
+        formattedAmount: formatterUtilities.formatNumber("CURRENCY", salesRecord.amount)
+    }), ...allSalesRecords];
 }
 
 function loadSales(salesRecords = []) {
-    return [...salesRecords];
+    return salesRecords.map(record => {
+        record.hidden = false;
+        record.formattedAmount = formatterUtilities.formatNumber("CURRENCY", record.amount);
+        return record;
+    });
+}
+
+function filterBy(salesRecords = [], {propertyName, id}) {
+    return salesRecords.map(record => {
+        record.hidden = typeof id === "undefined" ? false : record[propertyName].id !== id;
+        return record;
+    });
 }
 
 function sales(state = [], action) {
@@ -14,8 +29,10 @@ function sales(state = [], action) {
             return addNewSale(state, action.payload);
         case actions.LOAD_SALES:
             return loadSales(action.payload);
+        case actions.FILTER_BY:
+            return filterBy(state, action.payload);
         default:
-            return state
+            return state;
     }
 }
 

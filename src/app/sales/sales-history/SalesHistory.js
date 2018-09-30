@@ -3,10 +3,9 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 
 import SalesTable from "../sales-table/SalesTable";
+import SalesFilters from "./../sales-filters/SalesFilters";
 
 import * as salesActions from './../../../store/actions/sales';
-
-import formatterUtilities from './../../common/utilities/formatter';
 
 import './SalesHistory.css';
 
@@ -14,9 +13,14 @@ class SalesHistory extends Component {
     render() {
         return (
             <div className={"app-sales__history"}>
-                <h2 className={"margin-bottom-sm"}>Sales history</h2>
-                <div className={"app-sales__table-container"}>
-                    <SalesTable/>
+                <div className={"padding-all-md"}>
+                    <h2 className={"margin-bottom-md"}>Sales history</h2>
+                    <div className={"app-sales-filters-container"}>
+                        <SalesFilters/>
+                    </div>
+                    <div className={"app-sales__table-container"}>
+                        <SalesTable/>
+                    </div>
                 </div>
             </div>
         )
@@ -29,7 +33,7 @@ class SalesHistory extends Component {
             })
             .then(json => {
                 json = json.map(salesRecord => {
-                    salesRecord.formattedAmount = formatterUtilities.formatNumber("CURRENCY", salesRecord.amount);
+                    salesRecord.hidden = false;
                     return salesRecord;
                 });
                 this.props.salesActions.loadSales(json);

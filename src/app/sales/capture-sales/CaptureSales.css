@@ -1,5 +1,9 @@
 .app-sales__capture {
-    width: 95%;
+    border-right: 1px solid var(--app-brand-gray);
+    margin-right: var(--spacing-lg);
+    padding-right: var(--spacing-lg);
+    height: calc(100vh - 60px - var(--spacing-md));
+    min-height: 100%;
 }
 
 .app-form__submit {

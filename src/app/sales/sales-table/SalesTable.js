@@ -13,6 +13,7 @@ class SalesTable extends Component {
         let tableRecords = this.props.sales.sort((a, b) => {
             return new Date(b.date) - new Date(a.date);
         }).map((saleRecord, index) => {
+            if (saleRecord.hidden) return null;
             return (
                 <tr key={index}>
                     <td className={"app-table__cell"}>{moment(saleRecord.date).format('MMM DD, YYYY')}</td>

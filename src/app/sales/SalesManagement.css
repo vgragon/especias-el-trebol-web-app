@@ -1,9 +1,10 @@
 .app-capture-sales-container {
     width: 25%;
-    float: left;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .app-sales-history-container {
     width: 75%;
-    float: left;
+    display: inline-block;
 }
