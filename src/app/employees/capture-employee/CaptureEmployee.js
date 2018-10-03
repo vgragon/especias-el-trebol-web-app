@@ -12,13 +12,23 @@ import './CaptureEmployee.css';
 class CaptureEmployee extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = this.getInitialState();
+    }
+
+    getInitialState() {
+        return {
+            givenName: "",
+            familyName: "",
+            jobPosition: "",
+            telephoneNumber: "",
+            emailAddress: ""
+        };
     }
 
     handleChange(propertyName, event) {
         let employeeData = {};
         employeeData[propertyName] = event.target.value;
-        this.setState(employeeData)
+        this.setState(employeeData);
     }
 
     handleSubmit($event) {
@@ -43,6 +53,7 @@ class CaptureEmployee extends Component {
                 return response.json();
             }).then(createdObject => {
                 this.props.employeeActions.addNewEmployee(createdObject);
+                this.setState(this.getInitialState());
             }); // parses response to JSON
         } else {
             console.error(errorMessage);
@@ -58,27 +69,31 @@ class CaptureEmployee extends Component {
                         <div className={"app-input-group"}>
                             <label className={"app-input-group__label"}>Given name</label>
                             <input type="text" className={"app-input-group__input"} name={"givenName"}
+                                   value={this.state.givenName}
                                    title={"Given name"} onChange={this.handleChange.bind(this, 'givenName')}/>
                         </div>
                         <div className={"app-input-group"}>
                             <label className={"app-input-group__label"}>Family name(s)</label>
                             <input type="text" className={"app-input-group__input"} name={"familyName"}
+                                   value={this.state.familyName}
                                    title={"Family name"} onChange={this.handleChange.bind(this, 'familyName')}/>
                         </div>
                         <div className={"app-input-group"}>
                             <label className={"app-input-group__label"}>Job position</label>
                             <input type="text" className={"app-input-group__input"} name={"jobPosition"}
+                                   value={this.state.jobPosition}
                                    title={"Job position"} onChange={this.handleChange.bind(this, 'jobPosition')}/>
                         </div>
                         <div className={"app-input-group"}>
                             <label className={"app-input-group__label"}>Telephone number</label>
                             <input type="text" className={"app-input-group__input"} name={"telephoneNumber"}
-                                   title={"Telephone number"}
+                                   value={this.state.telephoneNumber} title={"Telephone number"}
                                    onChange={this.handleChange.bind(this, 'telephoneNumber')}/>
                         </div>
                         <div className={"app-input-group"}>
                             <label className={"app-input-group__label"}>Email address</label>
                             <input type="text" className={"app-input-group__input"} name={"emailAddress"}
+                                   value={this.state.emailAddress}
                                    title={"Email address"} onChange={this.handleChange.bind(this, 'emailAddress')}/>
                         </div>
                         <div className={"app-form__submit"}>

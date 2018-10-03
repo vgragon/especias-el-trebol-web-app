@@ -1,13 +1,13 @@
 export default {
     isValid: function (record) {
         switch (true) {
-            case typeof record.givenName === "undefined":
+            case !record.givenName:
                 return {isValid: false, errorMessage: "Given name is missing"};
-            case typeof record.familyName === "undefined":
+            case !record.familyName:
                 return {isValid: false, errorMessage: "Family name is missing"};
-            case typeof record.jobPosition === "undefined":
+            case !record.jobPosition:
                 return {isValid: false, errorMessage: "Job position is missing"};
-            case typeof record.telephoneNumber === "undefined":
+            case !record.telephoneNumber:
                 return {isValid: false, errorMessage: "Telephone number is missing"};
         }
 
