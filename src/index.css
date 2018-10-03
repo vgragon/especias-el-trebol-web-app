@@ -13,6 +13,7 @@
     /* Color */
     --app-brand-main: #87E271;
     --app-brand-secondary: #71B2E2;
+    --app-brand-danger: #ff6e6e;
     --app-brand-gray-light: #EFEFEF;
     --app-brand-gray: #C8C8C8;
     --app-brand-font: #000000;
@@ -85,6 +86,18 @@ h3 {
 
 .margin-bottom-md {
     margin-bottom: var(--spacing-md);
+}
+
+.margin-top-md {
+    margin-top: var(--spacing-md);
+}
+
+.margin-top-xl {
+    margin-top: var(--spacing-xl);
+}
+
+.margin-left-md {
+    margin-left: var(--spacing-md);
 }
 
 .padding-all-md {
