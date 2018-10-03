@@ -1,0 +1,32 @@
+.app-dialog-wrapper {
+    position: fixed;
+    display: none;
+    width: 100%;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+}
+
+.app-dialog-wrapper.visible {
+    display: block;
+}
+
+.app-dialog {
+    box-shadow: 0 0 5px 1px var(--app-brand-gray);
+    width: 550px;
+    max-width: 100%;
+    margin: auto;
+    background-color: #FFF;
+}
+
+.app-dialog__message {
+    min-height: 50px;
+}
+
+.app-dialog__title, .app-dialog__message {
+    border-bottom: 1px solid var(--app-brand-gray-light);
+}
+
+.app-dialog__title, .app-dialog__message, .app-dialog__buttons {
+    padding: var(--spacing-md);
+}
