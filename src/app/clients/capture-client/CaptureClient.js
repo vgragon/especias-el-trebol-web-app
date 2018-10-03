@@ -12,7 +12,17 @@ import './CaptureClient.css';
 class CaptureClient extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = this.getInitialState();
+    }
+
+    getInitialState() {
+        return {
+            name: "",
+            address: "",
+            googleMapsUrl: "",
+            telephoneNumber: "",
+            emailAddress: ""
+        };
     }
 
     handleChange(propertyName, event) {
@@ -43,6 +53,7 @@ class CaptureClient extends Component {
                 return response.json();
             }).then(createdObject => {
                 this.props.clientActions.addNewClient(createdObject);
+                this.setState(this.getInitialState());
             }); // parses response to JSON
         } else {
             console.error(errorMessage);
@@ -58,27 +69,31 @@ class CaptureClient extends Component {
                         <div className={"app-input-group"}>
                             <label className={"app-input-group__label"}>Name</label>
                             <input type="text" className={"app-input-group__input"} name={"name"}
+                                   value={this.state.name}
                                    title={"Name"} onChange={this.handleChange.bind(this, 'name')}/>
                         </div>
                         <div className={"app-input-group"}>
                             <label className={"app-input-group__label"}>Address</label>
                             <input type="text" className={"app-input-group__input"} name={"address"}
+                                   value={this.state.address}
                                    title={"Address"} onChange={this.handleChange.bind(this, 'address')}/>
                         </div>
                         <div className={"app-input-group"}>
                             <label className={"app-input-group__label"}>Google Maps URL</label>
                             <input type="text" className={"app-input-group__input"} name={"googleMapsUrl"}
+                                   value={this.state.googleMapsUrl}
                                    title={"Google Maps URL"} onChange={this.handleChange.bind(this, 'googleMapsUrl')}/>
                         </div>
                         <div className={"app-input-group"}>
                             <label className={"app-input-group__label"}>Telephone number</label>
                             <input type="text" className={"app-input-group__input"} name={"telephoneNumber"}
-                                   title={"Telephone number"}
+                                   value={this.state.telephoneNumber} title={"Telephone number"}
                                    onChange={this.handleChange.bind(this, 'telephoneNumber')}/>
                         </div>
                         <div className={"app-input-group"}>
                             <label className={"app-input-group__label"}>Email address</label>
                             <input type="text" className={"app-input-group__input"} name={"emailAddress"}
+                                   value={this.state.emailAddress}
                                    title={"Email address"} onChange={this.handleChange.bind(this, 'emailAddress')}/>
                         </div>
                         <div className={"app-form__submit"}>
