@@ -30,4 +30,5 @@
 
 .b-dropdown__toggle--secondary {
     position: absolute;
+    right: 0;
 }
