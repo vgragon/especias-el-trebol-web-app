@@ -5,3 +5,11 @@
     height: calc(100vh - 60px - var(--spacing-md));
     min-height: 100%;
 }
+
+@media screen and (max-width: 767px) {
+    .app-client__capture {
+        height: auto;
+        padding-right: 0;
+        margin-right: 0;
+    }
+}

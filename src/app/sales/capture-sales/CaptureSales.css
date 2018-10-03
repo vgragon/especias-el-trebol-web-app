@@ -9,3 +9,11 @@
 .app-form__submit {
     margin-top: var(--spacing-lg);
 }
+
+@media screen and (max-width: 767px) {
+    .app-sales__capture {
+        height: auto;
+        padding-right: 0;
+        margin-right: 0;
+    }
+}

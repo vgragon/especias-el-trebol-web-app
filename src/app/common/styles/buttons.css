@@ -13,6 +13,10 @@
     background-color: var(--app-brand-main);
 }
 
+.app-button--danger {
+    background-color: var(--app-brand-danger);
+}
+
 .app-button--default {
     background-color: var(--app-brand-gray);
 }

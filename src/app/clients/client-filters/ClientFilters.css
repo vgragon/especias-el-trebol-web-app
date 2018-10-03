@@ -1,7 +1,14 @@
 .app-client-filters {
     display: inline-block;
+    box-sizing: border-box;
     width: 55%;
     margin-bottom: var(--spacing-md);
     padding: var(--spacing-md);
     border: 1px solid var(--app-brand-gray);
+}
+
+@media screen and (max-width: 767px) {
+    .app-client-filters {
+        width: 100%;
+    }
 }
