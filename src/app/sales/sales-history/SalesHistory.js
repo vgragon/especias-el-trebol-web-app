@@ -4,6 +4,7 @@ import {bindActionCreators} from "redux";
 
 import SalesTable from "../sales-table/SalesTable";
 import SalesFilters from "./../sales-filters/SalesFilters";
+import dbUtil from "./../../../server";
 
 import * as salesActions from './../../../store/actions/sales';
 
@@ -27,7 +28,11 @@ class SalesHistory extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:3000/sales')
+        let url = new URL(dbUtil.URLS.sales.read);
+        let params = {load: ["employee", "client"]};
+        Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+        fetch(url)
             .then(response => {
                 return response.json()
             })

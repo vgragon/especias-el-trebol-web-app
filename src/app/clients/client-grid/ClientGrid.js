@@ -1,25 +1,31 @@
 import React, {Component} from 'react';
-
+import {withRouter} from "react-router";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
+
 import * as clientActions from "../../../store/actions/client";
 
-import defaultPersonImage from '../../../assets/images/default-person-300x300.jpg';
-
+import defaultCompanyImage from '../../../assets/images/default-company-300x300.jpg';
 import './ClientGrid.css';
 
 class ClientGrid extends Component {
+    handleClick(history, match, client) {
+        this.props.clientActions.showClientDetail(client);
+        history.push(`${match.url}/${client["_id"]}`);
+    }
+
     render() {
         let clientHTML = this.props.clients.map((client, index) => {
             let imageStyles = {
-                backgroundImage: `url(${client.image || defaultPersonImage})`,
+                backgroundImage: `url(${client.image || defaultCompanyImage})`,
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover'
             };
 
             return (
-                <div className={"app-client-card"} key={index}>
+                <div className={"app-client-card"} key={index}
+                     onClick={this.handleClick.bind(this, this.props.history, this.props.match, client)}>
                     <div style={imageStyles} className={"app-client-card__image"} aria-label="Client image"/>
                     <div className={"app-client-card__info"}>
                         <div className={"app-client-card__name"}>
@@ -47,7 +53,4 @@ const mapDispatchToProps = (dispatch) => ({
     clientActions: bindActionCreators(clientActions, dispatch)
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ClientGrid);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ClientGrid));

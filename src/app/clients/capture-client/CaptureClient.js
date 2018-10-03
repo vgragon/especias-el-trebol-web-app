@@ -61,6 +61,16 @@ class CaptureClient extends Component {
                                    title={"Name"} onChange={this.handleChange.bind(this, 'name')}/>
                         </div>
                         <div className={"app-input-group"}>
+                            <label className={"app-input-group__label"}>Address</label>
+                            <input type="text" className={"app-input-group__input"} name={"address"}
+                                   title={"Address"} onChange={this.handleChange.bind(this, 'address')}/>
+                        </div>
+                        <div className={"app-input-group"}>
+                            <label className={"app-input-group__label"}>Google Maps URL</label>
+                            <input type="text" className={"app-input-group__input"} name={"googleMapsUrl"}
+                                   title={"Google Maps URL"} onChange={this.handleChange.bind(this, 'googleMapsUrl')}/>
+                        </div>
+                        <div className={"app-input-group"}>
                             <label className={"app-input-group__label"}>Telephone number</label>
                             <input type="text" className={"app-input-group__input"} name={"telephoneNumber"}
                                    title={"Telephone number"}

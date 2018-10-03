@@ -6,6 +6,7 @@ import * as employeeActions from "../../store/actions/employee";
 
 import CaptureEmployee from './capture-employee/CaptureEmployee';
 import EmployeeCatalog from './employee-catalog/EmployeeCatalog';
+import dbUtil from "../../server";
 
 import './EmployeeManagement.css';
 
@@ -25,7 +26,7 @@ class EmployeeManagement extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:3000/employees')
+        fetch(dbUtil.URLS.employees.read)
             .then(response => {
                 return response.json()
             })

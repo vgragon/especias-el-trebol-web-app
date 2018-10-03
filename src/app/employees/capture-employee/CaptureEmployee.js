@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 
-import Dropdown from "../../common/dropdown/Dropdown";
-
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import * as employeeActions from "../../../store/actions/employee";
 
-import './CaptureEmployee.css';
 import employeesUtil from "./../utilities/EmployeeService";
 import dbUtil from "../../../server";
+
+import './CaptureEmployee.css';
 
 class CaptureEmployee extends Component {
     constructor(props) {
@@ -17,9 +16,9 @@ class CaptureEmployee extends Component {
     }
 
     handleChange(propertyName, event) {
-        let salesData = {};
-        salesData[propertyName] = event.target.value;
-        this.setState(salesData)
+        let employeeData = {};
+        employeeData[propertyName] = event.target.value;
+        this.setState(employeeData)
     }
 
     handleSubmit($event) {

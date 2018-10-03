@@ -16,9 +16,9 @@ function loadSales(salesRecords = []) {
     });
 }
 
-function filterBy(salesRecords = [], {propertyName, id}) {
+function filterBy(salesRecords = [], {filterProperty, identifierProperty, id}) {
     return salesRecords.map(record => {
-        record.hidden = typeof id === "undefined" ? false : record[propertyName].id !== id;
+        record.hidden = typeof id === "undefined" ? false : record[filterProperty][identifierProperty] !== id;
         return record;
     });
 }

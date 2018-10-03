@@ -8,7 +8,7 @@ import './Header.css';
 
 class Header extends Component {
     render() {
-        let activeRoute = this.props.routes.find(item => item.path === this.props.location.pathname);
+        let activeRoute = this.props.routes.find(route => this.props.location.pathname.indexOf(route.path) >= 0);
         let activeRouteName = activeRoute ? activeRoute.name : "";
 
         return (

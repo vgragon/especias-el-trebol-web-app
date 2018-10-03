@@ -41,8 +41,8 @@ class CaptureSales extends Component {
             let salesData = {};
             salesData.date = data.date;
             salesData.amount = data.amount;
-            salesData.employeeId = data.employee["_id"];
-            salesData.clientId = data.client["_id"];
+            salesData.employee = data.employee["_id"];
+            salesData.client = data.client["_id"];
 
             fetch(dbUtil.URLS.sales.create, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -56,8 +56,11 @@ class CaptureSales extends Component {
                 referrer: "no-referrer", // no-referrer, *client
                 body: JSON.stringify(salesData), // body data type must match "Content-Type" header
             }).then(response => {
-                debugger;
-                this.props.salesActions.addNewSale(response.json());
+                return response.json();
+            }).then(createdObject => {
+                this.props.salesActions.addNewSale(createdObject);
+            }).catch(err => {
+                console.error(err);
             }); // parses response to JSON
         } else {
             console.error(errorMessage);

@@ -22,8 +22,8 @@ class SalesFilters extends Component {
         let salesData = {};
         salesData[propertyName] = value;
         this.setState(salesData);
-        let valueForFilter = value ? value.id : undefined;
-        this.props.salesActions.filterBy({propertyName, id: valueForFilter});
+        let valueForFilter = value ? value["_id"] : undefined;
+        this.props.salesActions.filterBy({filterProperty: propertyName, id: valueForFilter, identifierProperty: "_id"});
     }
 
     render() {
