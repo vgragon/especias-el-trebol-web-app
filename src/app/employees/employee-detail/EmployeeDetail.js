@@ -49,7 +49,7 @@ class EmployeeDetail extends Component {
             }).then(response => {
                 return response.json();
             }).then(createdObject => {
-                this.props.salesActions.updateEmployee(createdObject);
+                this.props.employeeActions.updateEmployee(createdObject);
             }); // parses response to JSON
         } else {
             console.error(errorMessage);
@@ -58,7 +58,7 @@ class EmployeeDetail extends Component {
 
     navigateToCatalog($event) {
         if (typeof $event !== "undefined") $event.preventDefault();
-        this.props.salesActions.showEmployeeDetail({"_id": null});
+        this.props.employeeActions.showEmployeeDetail({"_id": null});
         this.props.history.push("/employees");
     }
 
@@ -92,7 +92,7 @@ class EmployeeDetail extends Component {
         }).then(response => {
             return response.json();
         }).then(deletedEmployee => {
-            this.props.salesActions.deleteEmployee(id);
+            this.props.employeeActions.deleteEmployee(id);
             this.props.dialogActions.toggleDialog(false);
             this.navigateToCatalog();
         }); // parses response to JSON
@@ -164,7 +164,7 @@ class EmployeeDetail extends Component {
                 json = json.map(employee => {
                     return employee;
                 });
-                this.props.salesActions.loadEmployees(json);
+                this.props.employeeActions.loadEmployees(json);
                 let employeeID = this.props.match.params.id;
                 let employee = this.props.employees.find(employee => employee["_id"] === employeeID);
                 this.setState({...employee});
@@ -179,7 +179,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    salesActions: bindActionCreators(employeeActions, dispatch),
+    employeeActions: bindActionCreators(employeeActions, dispatch),
     dialogActions: bindActionCreators(dialogActions, dispatch)
 });
 

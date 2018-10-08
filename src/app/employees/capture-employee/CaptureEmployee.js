@@ -52,7 +52,7 @@ class CaptureEmployee extends Component {
             }).then(response => {
                 return response.json();
             }).then(createdObject => {
-                this.props.salesActions.addNewEmployee(createdObject);
+                this.props.employeeActions.addNewEmployee(createdObject);
                 this.setState(this.getInitialState());
             }); // parses response to JSON
         } else {
@@ -114,7 +114,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    salesActions: bindActionCreators(employeeActions, dispatch)
+    employeeActions: bindActionCreators(employeeActions, dispatch)
 });
 
 export default connect(

@@ -34,7 +34,7 @@ class EmployeeManagement extends Component {
                 json = json.map(employee => {
                     return employee;
                 });
-                this.props.salesActions.loadEmployees(json);
+                this.props.employeeActions.loadEmployees(json);
             }).catch(ex => {
             console.log('parsing failed', ex)
         });
@@ -42,7 +42,7 @@ class EmployeeManagement extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    salesActions: bindActionCreators(employeeActions, dispatch)
+    employeeActions: bindActionCreators(employeeActions, dispatch)
 });
 
 export default connect(
