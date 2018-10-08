@@ -16,7 +16,16 @@ import './CaptureSales.css';
 class CaptureSales extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = this.getInitialState();
+    }
+
+    getInitialState() {
+        return {
+            date: undefined,
+            employee: undefined,
+            client: undefined,
+            amount: undefined,
+        };
     }
 
     handleSelect(propertyName, value) {
@@ -59,6 +68,7 @@ class CaptureSales extends Component {
                 return response.json();
             }).then(createdObject => {
                 this.props.salesActions.addNewSale(createdObject);
+                this.setState(this.getInitialState());
             }).catch(err => {
                 console.error(err);
             }); // parses response to JSON
@@ -131,7 +141,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
     salesActions: bindActionCreators(salesActions, dispatch),
-    employeeActions: bindActionCreators(employeeActions, dispatch),
+    salesActions: bindActionCreators(employeeActions, dispatch),
     clientActions: bindActionCreators(clientActions, dispatch)
 });
 

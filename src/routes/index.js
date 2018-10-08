@@ -3,6 +3,7 @@ import EmployeeManagement from '../app/employees/EmployeeManagement';
 import ClientManagement from '../app/clients/ClientManagement';
 import EmployeeDetail from "../app/employees/employee-detail/EmployeeDetail";
 import ClientDetail from "../app/clients/client-detail/ClientDetail";
+import SalesDetail from "../app/sales/sales-detail/SalesDetail";
 
 const appRoutes = [
     {
@@ -16,6 +17,7 @@ const appRoutes = [
         id: 1,
         name: 'Sales',
         path: '/sales',
+        exact: true,
         component: SalesManagement,
         hideOnNavigation: false
     },
@@ -47,6 +49,13 @@ const appRoutes = [
         name: 'Client Detail',
         path: '/clients/:id',
         component: ClientDetail,
+        hideOnNavigation: true
+    },
+    {
+        id: 31,
+        name: 'Sales Detail',
+        path: '/sales/:id',
+        component: SalesDetail,
         hideOnNavigation: true
     }
 ];

@@ -11,6 +11,7 @@ function addNewSale(allSalesRecords, salesRecord) {
 function loadSales(salesRecords = []) {
     return salesRecords.map(record => {
         record.hidden = false;
+        record.employee.fullName = `${record.employee.givenName} ${record.employee.familyName}`;
         record.formattedAmount = formatterUtilities.formatNumber("CURRENCY", record.amount);
         return record;
     });

@@ -4,7 +4,7 @@
 }
 
 .app-table__head {
-    background-color: var(--app-brand-gray-light);
+    background-color: var(--app-brand-gray);
 }
 
 .app-table__cell, .app-table__cell--header {

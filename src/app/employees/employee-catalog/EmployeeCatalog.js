@@ -32,7 +32,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    employeeActions: bindActionCreators(employeeActions, dispatch)
+    salesActions: bindActionCreators(employeeActions, dispatch)
 });
 
 export default connect(

@@ -4,22 +4,22 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 
 import dbUtil from "../../../server";
-import * as employeeActions from "../../../store/actions/employee";
+import * as salesActions from "../../../store/actions/sales";
 import * as dialogActions from "../../../store/actions/dialog";
-import employeesUtil from "../utilities/EmployeeService";
+import salesUtil from "../utilities/SalesService";
 
-import defaultPersonImage from '../../../assets/images/default-person-300x300.jpg';
-import './EmployeeDetail.css';
+import Dropdown from './../../common/dropdown/Dropdown';
 
-class EmployeeDetail extends Component {
+import './SalesDetail.css';
+
+class SalesDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            givenName: "",
-            familyName: "",
-            jobPosition: "",
-            telephoneNumber: "",
-            emailAddress: "",
+            date: "",
+            employee: undefined,
+            client: undefined,
+            amount: 0
         };
     }
 
@@ -29,13 +29,19 @@ class EmployeeDetail extends Component {
         this.setState(data);
     }
 
+    handleSelect(propertyName, value) {
+        let salesData = {};
+        salesData[propertyName] = value;
+        this.setState(salesData)
+    }
+
     handleSubmit() {
         let data = {...this.state};
 
-        let {isValid, errorMessage} = employeesUtil.isValid(data);
+        let {isValid, errorMessage} = salesUtil.isValid(data);
 
         if (isValid) {
-            fetch(dbUtil.URLS.employees.update, {
+            fetch(dbUtil.URLS.sales.update, {
                 method: "POST", // *GET, POST, PUT, DELETE, etc.
                 mode: "cors", // no-cors, cors, *same-origin
                 cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -49,7 +55,7 @@ class EmployeeDetail extends Component {
             }).then(response => {
                 return response.json();
             }).then(createdObject => {
-                this.props.salesActions.updateEmployee(createdObject);
+                this.props.salesActions.updateSale(createdObject);
             }); // parses response to JSON
         } else {
             console.error(errorMessage);
@@ -58,8 +64,8 @@ class EmployeeDetail extends Component {
 
     navigateToCatalog($event) {
         if (typeof $event !== "undefined") $event.preventDefault();
-        this.props.salesActions.showEmployeeDetail({"_id": null});
-        this.props.history.push("/employees");
+        this.props.salesActions.showSaleDetail({"_id": null});
+        this.props.history.push("/sales");
     }
 
     getCatalogUrl(history) {
@@ -71,14 +77,14 @@ class EmployeeDetail extends Component {
     handleClickOnDelete() {
         this.props.dialogActions.setDialogParams({
             title: "Delete employee",
-            message: `<div class="margin-bottom-sm">Are you sure you want to delete the following employee:</div> <strong>${this.state.givenName} ${this.state.familyName}</strong>`,
-            callback: this.deleteEmployee.bind(this, this.state["_id"])
+            message: `<div class="margin-bottom-sm">Are you sure you want to delete this sales record:</div>`,
+            callback: this.deleteSalesRecord.bind(this, this.state["_id"])
         });
         this.props.dialogActions.toggleDialog(true);
     }
 
-    deleteEmployee(id) {
-        fetch(dbUtil.URLS.employees.delete, {
+    deleteSalesRecord(id) {
+        fetch(dbUtil.URLS.sales.delete, {
             method: "DELETE", // *GET, POST, PUT, DELETE, etc.
             mode: "cors", // no-cors, cors, *same-origin
             cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -91,56 +97,51 @@ class EmployeeDetail extends Component {
             body: JSON.stringify({id}), // body data type must match "Content-Type" header
         }).then(response => {
             return response.json();
-        }).then(deletedEmployee => {
-            this.props.salesActions.deleteEmployee(id);
+        }).then(deletedSalesRecord => {
+            this.props.salesActions.deleteSale(id);
             this.props.dialogActions.toggleDialog(false);
             this.navigateToCatalog();
         }); // parses response to JSON
     }
 
     render() {
-        let imageStyles = {
-            backgroundImage: `url(${this.state.image || defaultPersonImage})`,
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover'
-        };
-
         return (
-            <div className={"app-employee-detail"}>
+            <div className={"app-sales-detail"}>
                 <a className={"app-anchor"} href={this.getCatalogUrl(this.props.history, this.props.match)}
-                   onClick={this.navigateToCatalog.bind(this)}>Back to catalog</a>
-                <div style={imageStyles} className={"app-employee__image"} aria-label="Employee image"/>
+                   onClick={this.navigateToCatalog.bind(this)}>Back to table</a>
                 <div className={"app-employee__info"}>
+
                     <div className={"app-input-group"}>
-                        <label className={"app-input-group__label"}>Given name</label>
-                        <input type="text" className={"app-input-group__input"} name={"givenName"}
-                               value={this.state.givenName}
-                               title={"Given name"} onChange={this.handleChange.bind(this, 'givenName')}/>
+                        <label className={"app-input-group__label"}>Date</label>
+                        <input type="date" className={"app-input-group__input"} name={"date"}
+                               value={this.state.date}
+                               title={"Date"} onChange={this.handleChange.bind(this, 'date')}/>
                     </div>
                     <div className={"app-input-group"}>
-                        <label className={"app-input-group__label"}>Family name(s)</label>
-                        <input type="text" className={"app-input-group__input"} name={"familyName"}
-                               value={this.state.familyName}
-                               title={"Family name"} onChange={this.handleChange.bind(this, 'familyName')}/>
+                        <label className={"app-input-group__label"}>Employee</label>
+                        <Dropdown options={this.props.employees}
+                                  onSelect={this.handleSelect.bind(this, 'employee')}
+                                  selectedOption={this.state.employee}
+                                  placeholderOption={{_id: 'DEFAULT', fullName: 'Select an option'}}
+                                  propertyWithID="_id"
+                                  propertyWithImage="image"
+                                  propertyWithName="fullName"/>
                     </div>
                     <div className={"app-input-group"}>
-                        <label className={"app-input-group__label"}>Job position</label>
-                        <input type="text" className={"app-input-group__input"} name={"jobPosition"}
-                               value={this.state.jobPosition}
-                               title={"Job position"} onChange={this.handleChange.bind(this, 'jobPosition')}/>
+                        <label className={"app-input-group__label"}>Client</label>
+                        <Dropdown options={this.props.clients}
+                                  onSelect={this.handleSelect.bind(this, 'client')}
+                                  selectedOption={this.state.client}
+                                  placeholderOption={{id: 'DEFAULT', name: 'Select an option'}}
+                                  propertyWithID="id"
+                                  propertyWithImage="image"
+                                  propertyWithName="name"/>
                     </div>
                     <div className={"app-input-group"}>
-                        <label className={"app-input-group__label"}>Telephone number</label>
-                        <input type="text" className={"app-input-group__input"} name={"telephoneNumber"}
-                               value={this.state.telephoneNumber} title={"Telephone number"}
-                               onChange={this.handleChange.bind(this, 'telephoneNumber')}/>
-                    </div>
-                    <div className={"app-input-group"}>
-                        <label className={"app-input-group__label"}>Email address</label>
-                        <input type="text" className={"app-input-group__input"} name={"emailAddress"}
-                               value={this.state.emailAddress}
-                               title={"Email address"} onChange={this.handleChange.bind(this, 'emailAddress')}/>
+                        <label className={"app-input-group__label"}>Amount (MXN)</label>
+                        <input type="number" className={"app-input-group__input"} name={"amount"}
+                               value={this.state.amount} title={"Sales amount"}
+                               onChange={this.handleChange.bind(this, 'amount')}/>
                     </div>
                     <div className={"margin-top-md"}>
                         <button className={"app-button app-button--primary app-button--update-employee"}
@@ -156,18 +157,18 @@ class EmployeeDetail extends Component {
     }
 
     componentDidMount() {
-        fetch(dbUtil.URLS.employees.read)
+        fetch(dbUtil.URLS.sales.read)
             .then(response => {
                 return response.json()
             })
             .then(json => {
-                json = json.map(employee => {
-                    return employee;
+                json = json.map(sale => {
+                    return sale;
                 });
-                this.props.salesActions.loadEmployees(json);
-                let employeeID = this.props.match.params.id;
-                let employee = this.props.employees.find(employee => employee["_id"] === employeeID);
-                this.setState({...employee});
+                this.props.salesActions.loadSales(json);
+                let salesId = this.props.match.params.id;
+                let sale = this.props.sales.find(sale => sale["_id"] === salesId);
+                this.setState({...sale});
             }).catch(ex => {
             console.log('parsing failed', ex)
         });
@@ -175,12 +176,12 @@ class EmployeeDetail extends Component {
 }
 
 const mapStateToProps = state => ({
-    employees: state.employees
+    sales: state.sales
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    salesActions: bindActionCreators(employeeActions, dispatch),
+    salesActions: bindActionCreators(salesActions, dispatch),
     dialogActions: bindActionCreators(dialogActions, dispatch)
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EmployeeDetail));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SalesDetail));
