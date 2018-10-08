@@ -1,0 +1,105 @@
+@import "./app/common/styles/forms.css";
+@import "./app/common/styles/buttons.css";
+@import "./app/common/styles/tables.css";
+
+:root {
+    /* Spacing */
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 20px;
+    --spacing-lg: 30px;
+    --spacing-xl: 50px;
+
+    /* Color */
+    --app-brand-main: #87E271;
+    --app-brand-secondary: #71B2E2;
+    --app-brand-danger: #ff6e6e;
+    --app-brand-gray-light: #EFEFEF;
+    --app-brand-gray: #C8C8C8;
+    --app-brand-font: #000000;
+}
+
+@font-face {
+    font-family: LatoLight;
+    font-weight: 300;
+    src: url("./assets/fonts/Lato/Lato-Light.ttf");
+}
+
+@font-face {
+    font-family: Lato;
+    font-weight: normal;
+    src: url("./assets/fonts/Lato/Lato-Regular.ttf");
+}
+
+@font-face {
+    font-family: LatoBold;
+    font-weight: 600;
+    src: url("./assets/fonts/Lato/Lato-Bold.ttf");
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 10px;
+    height: 100%;
+}
+
+body {
+    font-size: 1.4rem;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Lato, 'sans-serif';
+}
+
+h1, h2, h3 {
+    margin: 0;
+    font-family: LatoBold, 'sans-serif';
+}
+
+h1 {
+    font-size: 2.2rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+}
+
+h3 {
+    font-size: 1.6rem;
+}
+
+.float-right {
+    float: right;
+}
+
+.float-left {
+    float: left;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.margin-bottom-sm {
+    margin-bottom: var(--spacing-sm);
+}
+
+.margin-bottom-md {
+    margin-bottom: var(--spacing-md);
+}
+
+.margin-top-md {
+    margin-top: var(--spacing-md);
+}
+
+.margin-top-xl {
+    margin-top: var(--spacing-xl);
+}
+
+.margin-left-md {
+    margin-left: var(--spacing-md);
+}
+
+.padding-all-md {
+    padding: var(--spacing-md);
+}

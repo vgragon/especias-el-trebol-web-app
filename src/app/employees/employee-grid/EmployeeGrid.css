@@ -1,0 +1,46 @@
+.app-employee-card {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    height: 200px;
+    width: 20%;
+    cursor: pointer;
+    box-shadow: 0px 2px 1px 0px var(--app-brand-gray);
+}
+
+.app-employee-card:hover {
+    box-shadow: 0px 2px 5px 1px var(--app-brand-gray);
+}
+
+.app-employee-card__image {
+    height: 120px;
+    width: 100%;
+    display: block;
+}
+
+.app-employee-card__info {
+    background-color: var(--app-brand-gray-light);
+    padding: var(--spacing-md);
+    height: calc(60px - var(--spacing-md));
+}
+
+.app-employee-card__name {
+    margin-bottom: var(--spacing-sm);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 767px) {
+    .app-employee-card {
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .app-employee-card {
+        width: 40%;
+    }
+}

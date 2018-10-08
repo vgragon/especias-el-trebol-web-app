@@ -6,6 +6,10 @@ const htmlPlugin = new HtmlWebPackPlugin({
 });
 
 module.exports = {
+    devtool: "cheap-module-eval-source-map",
+    devServer: {
+        historyApiFallback: true,
+    },
     module: {
         rules: [
             {
@@ -14,8 +18,7 @@ module.exports = {
                 use: {
                     loader: "babel-loader"
                 }
-            },
-            {
+            }, {
                 test: /\.css$/,
                 use: [
                     {
@@ -23,13 +26,33 @@ module.exports = {
                     },
                     {
                         loader: "css-loader",
+                        // options: {
+                        //     modules: true,
+                        //     importLoaders: 1,
+                        //     localIdentName: "[name]_[local]_[hash:base64]",
+                        //     sourceMap: true,
+                        //     minimize: true
+                        // }
+                    }
+                ]
+            }, {
+                test: /\.(ttf|eot|woff|woff2)$/,
+                use: {
+                    loader: "file-loader",
+                    options: {
+                        name: "fonts/[name].[ext]",
+                    },
+                }
+            }, {
+                test: /\.(gif|png|jpe?g|svg)$/i,
+                use: [
+                    'file-loader',
+                    {
+                        loader: 'image-webpack-loader',
                         options: {
-                            modules: true,
-                            importLoaders: 1,
-                            localIdentName: "[name]_[local]_[hash:base64]",
-                            sourceMap: true,
-                            minimize: true
-                        }
+                            bypassOnDebug: true, // webpack@1.x
+                            disable: true // webpack@2.x and newer
+                        },
                     }
                 ]
             }

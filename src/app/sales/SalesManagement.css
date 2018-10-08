@@ -1,0 +1,26 @@
+.app-capture-sales-container {
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.app-sales-history-container {
+    width: 75%;
+    display: inline-block;
+}
+
+@media screen and (max-width: 767px) {
+    .app-capture-sales-container, .app-sales-history-container {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .app-capture-sales-container {
+        width: 35%;
+    }
+
+    .app-sales-history-container {
+        width: 65%;
+    }
+}

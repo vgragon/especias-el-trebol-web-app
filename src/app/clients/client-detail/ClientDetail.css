@@ -1,0 +1,40 @@
+.app-client-detail {
+    padding: var(--spacing-md) calc(var(--spacing-md) + 60px);
+}
+
+.app-client-detail .app-client__image {
+    height: 140px;
+    border-radius: 100%;
+    width: 140px;
+    margin: auto;
+    display: block;
+}
+
+.app-client-detail .app-input-group {
+    display: inline-block;
+    width: 30%;
+    margin: var(--spacing-md) 0;
+}
+
+.app-client-detail .app-client__info {
+    margin: auto;
+}
+
+.app-client-detail .app-client__image {
+    height: 140px;
+    border-radius: 100%;
+    width: 140px;
+    margin-top: var(--spacing-lg);
+    margin-left: 0;
+    display: block;
+}
+
+@media screen and (max-width: 767px) {
+    .app-client-detail {
+        padding: var(--spacing-md);
+    }
+
+    .app-client-detail .app-input-group {
+        width: 100%;
+    }
+}

@@ -1,0 +1,23 @@
+.app-input-group {
+    display: block;
+    margin: var(--spacing-md) 0;
+}
+
+.app-input-group__label {
+    display: block;
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.app-input-group__input {
+    display: block;
+    outline: none;
+    font-size: 1.4rem;
+    width: 100%;
+    max-width: calc(250px - var(--spacing-xs) * 2);
+    height: 20px;
+    border: none;
+    border-bottom: 1px solid var(--app-brand-font);
+    padding: var(--spacing-xs);
+}

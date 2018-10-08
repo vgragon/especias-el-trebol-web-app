@@ -1,0 +1,7 @@
+.app-sales-filters {
+    display: inline-block;
+    width: 55%;
+    margin-bottom: var(--spacing-md);
+    padding: var(--spacing-md);
+    border: 1px solid var(--app-brand-gray);
+}

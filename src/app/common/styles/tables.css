@@ -1,0 +1,14 @@
+.app-table {
+    border-spacing: 0;
+    width: 100%;
+}
+
+.app-table__head {
+    background-color: var(--app-brand-gray);
+}
+
+.app-table__cell, .app-table__cell--header {
+    text-align: left;
+    width: 25%;
+    padding: var(--spacing-sm);
+}
